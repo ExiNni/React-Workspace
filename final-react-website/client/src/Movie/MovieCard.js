@@ -1,7 +1,8 @@
 import React from "react";
+import './MovieCard.css';
 
 const MovieCard = ({movie}) => (
-    <div>
+    <div className="movie-card">
         {movie.poster && <img src={movie.poster} />}
         <h2>{movie.title}</h2>
         <p>평점: {movie.rating}</p>

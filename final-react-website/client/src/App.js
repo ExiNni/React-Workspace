@@ -1,31 +1,48 @@
-import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
-import Header from './Component/Header';
-import Footer from './Component/Footer';
-import Home from './Component/Home';
-import NumberGuessingGame from './Game/NumberGuessingGame';
-import MovieList from './Movie/MovieList';
-import Todos from './TodoList/Todos'
-import Quiz from './Game/Quiz'
+import React, {useEffect, useState} from "react";
+import axios from 'axios';
 
+function AppCafe() {
+  const [cafes, setCafes] = useState([]);
+  const [newCafe, setNewCafe] = useState({NAME:'', PRICE:''});
+  
+  const addCafe = () => {
+    axios.post('http://localhost:5003/api/cafe', newCafe)
+    .then((response) =>{
+      setCafes(response.data);
+      setNewCafe({NAME:''}, {PRICE:''}); // DB에 저장 후 초기화 해주는 것
+    })
+    .catch((error) => console.error('에러가 발생했습니다.', error));
+  };
 
-function App() {
+  useEffect(() => {
+    axios.get('http://localhost:5003/api/cafe')
+    .then((response) => setCafes(response.data))
+    .catch((error) => console.error('에러입니다', error));
+  });
+
   return (
-    <Router>
-      <div>
-        <Header />
-        <div className='container mt-4'>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/numberGuessingGame' element={<NumberGuessingGame />} />
-            <Route path='/movie' element={<MovieList />} />
-            <Route path='/todos' element={<Todos />} />
-            <Route path='/quiz' element={<Quiz />} />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
-    </Router>
+    <div>
+      <h1>카페 메뉴</h1>
+      <ul>
+        {cafes.map((cafe) => (
+          <li key={cafe.ID}>
+            이름: {cafe.NAME} <br/>
+            가격: {cafe.PRICE}
+          </li>
+        ))}
+      </ul>
+      <h2>새로운 카페 추가</h2>
+      <label>이름: </label>
+      <input type="text" value={newCafe.NAME} onChange={(e) => 
+        setNewCafe({...newCafe, NAME: e.target.value})} />
+        <br/>
+      <label>가격: </label>
+      <input type="text" value={newCafe.PRICE} onChange={(e) => 
+        setNewCafe({...newCafe, PRICE: e.target.value})} />
+        <br/>
+      <button onClick={addCafe}>카페 추가하기</button>
+    </div>
   );
 }
 
-export default App;
+export default AppCafe;
