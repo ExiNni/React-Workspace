@@ -27,7 +27,15 @@ export default function Header(){
                     <Nav.Link as={Link} to="/blog">
                         Blog
                     </Nav.Link>
-                    
+
+                    <NavDropdown title="Weather" id="basic-nav-dropdown">
+                        <NavDropdown.Item as={Link} to="/weather">
+                            Weather
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/weatherSearch">
+                            Weather Search
+                        </NavDropdown.Item>
+                    </NavDropdown>
 
                     <NavDropdown title="Games" id="basic-nav-dropdown">
                         <NavDropdown.Item as={Link} to="/numberGuessingGame">

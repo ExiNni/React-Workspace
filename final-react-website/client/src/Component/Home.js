@@ -60,6 +60,28 @@ export default function Home() {
                             </Link>
                         </Card.Body>
                     </Card>
+                    <br/>
+
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>리액트 웹사이트</Card.Title>
+                            <Card.Text>리액트와 부트스트랩을 활용한 웹사이트</Card.Text>
+                            <Link to="/weather">
+                                <Button variant="primary">날씨 확인</Button>
+                            </Link>
+                        </Card.Body>
+                    </Card>
+                    <br/>
+
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>리액트 웹사이트</Card.Title>
+                            <Card.Text>리액트와 부트스트랩을 활용한 웹사이트</Card.Text>
+                            <Link to="/weatherSearch">
+                                <Button variant="primary">날씨 검색</Button>
+                            </Link>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
         </Container >
